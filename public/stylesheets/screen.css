@@ -48,7 +48,7 @@ a:hover {
   font-size: 1.4em;
   line-height: 1.4em;
   font-family: Lato;
-  font-weight: 100;
+  font-weight: 200;
   
   color: #333;
 }
@@ -73,17 +73,6 @@ a:hover {
     color: #fff;
     font-size: 1.15em;
     border-radius: 2px;
-  }
-  
-  #actions li a kbd,
-  #actions li .a kbd {
-    background: #fff;
-    border-radius: 2px;
-    padding: 0 3px;
-    margin: 0 2px;
-    color: #C31A41;
-    font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif;
-    font-size: .9em;
   }
   
   #actions li span {
