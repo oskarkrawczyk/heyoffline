@@ -3,9 +3,6 @@ extend = (obj, extensions...) ->
   (obj[key] = value) for key, value of ext for ext in extensions
   obj
   
-log = ->
-  console.log (if arguments.length <= 1 then arguments[0] else arguments) if typeof console isnt 'undefined'
-  
 addEvent = (element, event, fn, useCapture = true) ->
   element.addEventListener event, fn, useCapture
   
@@ -33,10 +30,10 @@ class Heyoffline
     disableDismiss: false
     elements: ['input', 'select', 'textarea', '*[contenteditable]']
     # onOnline: ->
-    #   log 'online', this
+    #   console.log 'online', this
     # onOffline: ->
-    #   log 'offline', this
-  
+    #   console.log 'offline', this
+    
   # set a global flag if any field on the page has been modified
   modified: false
   
@@ -78,12 +75,11 @@ class Heyoffline
         fontSize: '1.7em'
         paddingBottom: 15
       content:
-        color: ''
         paddingBottom: 15
       button:
         fontWeight: 'bold'
         cursor: 'pointer'
-      
+        
     @attachEvents()
     
   createElements: ->
@@ -143,7 +139,7 @@ class Heyoffline
       @showMessage() if @modified
     else
       @showMessage()
-    
+      
   showMessage: ->
     @createElements()
     @options.onOnline.call this if @options.onOnline
