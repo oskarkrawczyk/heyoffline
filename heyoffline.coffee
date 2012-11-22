@@ -30,7 +30,7 @@ class Heyoffline
     monitorFields: false
     prefix: 'heyoffline'
     noStyles: false
-    disableDimiss: false
+    disableDismiss: false
     elements: ['input', 'select', 'textarea', '*[contenteditable]']
     # onOnline: ->
     #   log 'online', this
@@ -102,7 +102,7 @@ class Heyoffline
     @createElement @elements.modal, 'content', @options.text.content
     
     # button
-    if not @options.disableDimiss
+    if not @options.disableDismiss
       @createElement @elements.modal, 'button', @options.text.button
       addEvent @elements.button, 'click', @hideMessage
       

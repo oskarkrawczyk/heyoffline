@@ -55,7 +55,7 @@
       monitorFields: false,
       prefix: 'heyoffline',
       noStyles: false,
-      disableDimiss: false,
+      disableDismiss: false,
       elements: ['input', 'select', 'textarea', '*[contenteditable]']
     };
 
@@ -125,7 +125,7 @@
       this.createElement(this.elements.overlay, 'modal');
       this.createElement(this.elements.modal, 'heading', this.options.text.title);
       this.createElement(this.elements.modal, 'content', this.options.text.content);
-      if (!this.options.disableDimiss) {
+      if (!this.options.disableDismiss) {
         this.createElement(this.elements.modal, 'button', this.options.text.button);
         addEvent(this.elements.button, 'click', this.hideMessage);
       }
