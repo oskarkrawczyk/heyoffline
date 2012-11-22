@@ -127,9 +127,8 @@
       this.createElement(this.elements.modal, 'content', this.options.text.content);
       if (!this.options.disableDismiss) {
         this.createElement(this.elements.modal, 'button', this.options.text.button);
-        addEvent(this.elements.button, 'click', this.hideMessage);
+        return addEvent(this.elements.button, 'click', this.hideMessage);
       }
-      return log(this.elements.overlay);
     };
 
     Heyoffline.prototype.createElement = function(context, element, text) {

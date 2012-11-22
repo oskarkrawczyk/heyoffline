@@ -106,8 +106,6 @@ class Heyoffline
       @createElement @elements.modal, 'button', @options.text.button
       addEvent @elements.button, 'click', @hideMessage
       
-    log @elements.overlay
-    
   createElement: (context, element, text) ->
     @elements[element].setAttribute 'class', "#{@options.prefix}_#{element}"
     @elements[element] = context.insertBefore @elements[element]
