@@ -1,6 +1,8 @@
 # Heyoffline.js (actually Heyoffline.coffee)
 Warn your users when their network goes down. Make sure they don't lose anything.
 
+See a **[list of apps and websites using Heyoffline.js](https://github.com/oskarkrawczyk/heyoffline.js/wiki/Apps-&-websites-using-Heyoffline.js)**
+
 ## Demo
 See **[demo](http://oskarkrawczyk.github.com/heyoffline.js/)**.
 
