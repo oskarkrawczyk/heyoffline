@@ -19,11 +19,11 @@ class Heyoffline
   # default options
   options:
     text:
-      title: "You're currently offline"
-      content: "Seems like you've gone offline,
+      title: "You’re currently offline"
+      content: "Seems like you’ve gone offline,
                 you might want to wait until your network comes back before continuing.<br /><br />
-                This message will self-destruct once you're online again."
-      button: "Relax, I know what I'm doing"
+                This message will self-destruct once you’re online again."
+      button: "Relax, I know what I’m doing"
     monitorFields: false
     prefix: 'heyoffline'
     noStyles: false
