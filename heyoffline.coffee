@@ -104,7 +104,7 @@ class Heyoffline
       
   createElement: (context, element, text) ->
     @elements[element].setAttribute 'class', "#{@options.prefix}_#{element}"
-    @elements[element] = context.insertBefore @elements[element]
+    @elements[element] = context.appendChild @elements[element]
     @elements[element].innerHTML = text if text
     setStyles @elements[element], @defaultStyles[element] unless @options.noStyles
     

@@ -126,7 +126,7 @@
 
     Heyoffline.prototype.createElement = function(context, element, text) {
       this.elements[element].setAttribute('class', "" + this.options.prefix + "_" + element);
-      this.elements[element] = context.insertBefore(this.elements[element]);
+      this.elements[element] = context.appendChild(this.elements[element]);
       if (text) {
         this.elements[element].innerHTML = text;
       }
