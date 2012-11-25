@@ -3,7 +3,7 @@ extend = (obj, extensions...) ->
   (obj[key] = value) for key, value of ext for ext in extensions
   obj
   
-addEvent = (element, event, fn, useCapture = true) ->
+addEvent = (element, event, fn, useCapture = false) ->
   element.addEventListener event, fn, useCapture
   
 setStyles = (element, styles) ->

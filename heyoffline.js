@@ -19,7 +19,7 @@
 
   addEvent = function(element, event, fn, useCapture) {
     if (useCapture == null) {
-      useCapture = true;
+      useCapture = false;
     }
     return element.addEventListener(event, fn, useCapture);
   };
