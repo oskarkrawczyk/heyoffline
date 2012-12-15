@@ -61,6 +61,7 @@ class Heyoffline
         left: 0
         width: '100%'
         background: 'rgba(0, 0, 0, 0.3)'
+        zIndex: 500
       modal:
         padding: 15
         background: '#fff'
@@ -71,6 +72,7 @@ class Heyoffline
         top: '30%'
         color: '#444'
         borderRadius: 2
+        zIndex: 600
       heading:
         fontSize: '1.7em'
         paddingBottom: 15

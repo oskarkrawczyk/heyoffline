@@ -80,11 +80,12 @@
       };
       this.defaultStyles = {
         overlay: {
-          position: 'fixed',
+          position: 'absolute',
           top: 0,
           left: 0,
           width: '100%',
-          background: 'rgba(0, 0, 0, 0.3)'
+          background: 'rgba(0, 0, 0, 0.3)',
+          zIndex: 500
         },
         modal: {
           padding: 15,
@@ -95,7 +96,8 @@
           position: 'relative',
           top: '30%',
           color: '#444',
-          borderRadius: 2
+          borderRadius: 2,
+          zIndex: 600
         },
         heading: {
           fontSize: '1.7em',
