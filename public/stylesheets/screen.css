@@ -17,6 +17,11 @@ a:hover {
   text-decoration: none;
 }
 
+.gittip {
+  padding-top: 20px;
+  text-align: center;
+}
+
 #body-wrapper {
   width: 480px;
   margin: 30px auto;
