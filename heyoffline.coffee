@@ -111,7 +111,7 @@ class Heyoffline
     
   resizeOverlay: ->
     setStyles @elements.overlay,
-      height: window.innerHeight
+      height: "#{window.innerHeight}px"
       
   destroyElements: ->
     destroy @elements.overlay if @elements.overlay

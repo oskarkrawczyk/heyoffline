@@ -138,7 +138,7 @@
 
     Heyoffline.prototype.resizeOverlay = function() {
       return setStyles(this.elements.overlay, {
-        height: window.innerHeight
+        height: "" + window.innerHeight + "px"
       });
     };
 
