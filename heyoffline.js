@@ -25,11 +25,10 @@
   };
 
   setStyles = function(element, styles) {
-    var key, value, _results;
+    var key, _results;
     _results = [];
     for (key in styles) {
-      value = styles[key];
-      _results.push(element.style[key] = !isNaN(value) ? "" + value + "px" : value);
+      _results.push(element.style[key] = styles[key]);
     }
     return _results;
   };
@@ -88,23 +87,23 @@
           zIndex: 500
         },
         modal: {
-          padding: 15,
+          padding: '15px',
           background: '#fff',
           boxShadow: '0 2px 30px rgba(0, 0, 0, 0.3)',
-          width: 450,
+          width: '450px',
           margin: '0 auto',
           position: 'relative',
           top: '30%',
           color: '#444',
-          borderRadius: 2,
+          borderRadius: '2px',
           zIndex: 600
         },
         heading: {
           fontSize: '1.7em',
-          paddingBottom: 15
+          paddingBottom: '15px'
         },
         content: {
-          paddingBottom: 15
+          paddingBottom: '15px'
         },
         button: {
           fontWeight: 'bold',

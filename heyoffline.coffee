@@ -8,8 +8,7 @@ addEvent = (element, event, fn, useCapture = false) ->
   
 setStyles = (element, styles) ->
   for key of styles
-    value = styles[key]
-    element.style[key] = if not isNaN value then "#{value}px" else value
+    element.style[key] = styles[key]
     
 destroy = (element) ->
   element.parentNode.removeChild element
@@ -63,21 +62,21 @@ class Heyoffline
         background: 'rgba(0, 0, 0, 0.3)'
         zIndex: 500
       modal:
-        padding: 15
+        padding: '15px'
         background: '#fff'
         boxShadow: '0 2px 30px rgba(0, 0, 0, 0.3)'
-        width: 450
+        width: '450px'
         margin: '0 auto'
         position: 'relative'
         top: '30%'
         color: '#444'
-        borderRadius: 2
+        borderRadius: '2px'
         zIndex: 600
       heading:
         fontSize: '1.7em'
-        paddingBottom: 15
+        paddingBottom: '15px'
       content:
-        paddingBottom: 15
+        paddingBottom: '15px'
       button:
         fontWeight: 'bold'
         cursor: 'pointer'
