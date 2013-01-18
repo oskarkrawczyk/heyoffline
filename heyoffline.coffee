@@ -29,9 +29,9 @@ class Heyoffline
     disableDismiss: false
     elements: ['input', 'select', 'textarea', '*[contenteditable]']
     # onOnline: ->
-    #   console.log 'online', this
+    #   console.log 'online', @
     # onOffline: ->
-    #   console.log 'offline', this
+    #   console.log 'offline', @
     
   # set a global flag if any field on the page has been modified
   modified: false
@@ -132,7 +132,7 @@ class Heyoffline
   networkEvents: (event) ->
     addEvent window, event, @[event]
     
-  online: =>
+  online: (event) =>
     @hideMessage()
     
   offline: =>
@@ -143,12 +143,12 @@ class Heyoffline
       
   showMessage: ->
     @createElements()
-    @options.onOnline.call this if @options.onOnline
+    @options.onOnline.call @ if @options.onOnline
     
   hideMessage: (event) =>
     event.preventDefault() if event
     @destroyElements()
-    @options.onOffline.call this if @options.onOffline
+    @options.onOffline.call @ if @options.onOffline
     
 addEvent window, 'load', ->
   window.Heyoffline = new Heyoffline

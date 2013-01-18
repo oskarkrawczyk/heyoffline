@@ -186,7 +186,7 @@
       return addEvent(window, event, this[event]);
     };
 
-    Heyoffline.prototype.online = function() {
+    Heyoffline.prototype.online = function(event) {
       return this.hideMessage();
     };
 
