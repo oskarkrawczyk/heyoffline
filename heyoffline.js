@@ -3,13 +3,15 @@ var Heyoffline, addEvent, destroy, extend, setStyles,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 extend = function(destination, source) {
-  var obj;
-  for (obj in source) {
-    if (source[property] && source[property].constructor && source[property].constructor === Object) {
-      destination[property] = destination[property] || {};
-      arguments_.callee(destination[property], source[property]);
-    } else {
-      destination[property] = source[property];
+  var property;
+  if (source) {
+    for (property in source) {
+      if (source[property] && source[property].constructor && source[property].constructor === Object) {
+        destination[property] = destination[property] || {};
+        arguments.callee(destination[property], source[property]);
+      } else {
+        destination[property] = source[property];
+      }
     }
   }
   return destination;

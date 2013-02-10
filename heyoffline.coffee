@@ -1,11 +1,12 @@
 # extend object with another objects
 extend = (destination, source) ->
-  for obj of source
-    if source[property] and source[property].constructor and source[property].constructor is Object
-      destination[property] = destination[property] or {}
-      arguments_.callee destination[property], source[property]
-    else
-      destination[property] = source[property]
+  if source
+    for property of source
+      if source[property] and source[property].constructor and source[property].constructor is Object
+        destination[property] = destination[property] or {}
+        arguments.callee destination[property], source[property]
+      else
+        destination[property] = source[property]
   destination
 
 addEvent = (element, event, fn, useCapture = false) ->
