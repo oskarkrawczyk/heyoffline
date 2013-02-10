@@ -83,9 +83,6 @@ class Heyoffline
 
     @attachEvents()
 
-  setOptions: (options) ->
-    extend @options, options
-
   createElements: ->
 
     # overlay
@@ -152,6 +149,3 @@ class Heyoffline
     event.preventDefault() if event
     @destroyElements()
     @options.onOffline.call @ if @options.onOffline
-
-addEvent window, 'load', ->
-  window.Heyoffline = new Heyoffline
