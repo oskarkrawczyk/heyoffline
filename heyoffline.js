@@ -113,6 +113,10 @@
       return this.attachEvents();
     };
 
+    Heyoffline.prototype.setOptions = function(options) {
+      return extend(this.options, options);
+    };
+
     Heyoffline.prototype.createElements = function() {
       this.createElement(document.body, 'overlay');
       this.resizeOverlay();

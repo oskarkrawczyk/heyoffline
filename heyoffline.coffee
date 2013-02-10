@@ -2,19 +2,19 @@
 extend = (obj, extensions...) ->
   (obj[key] = value) for key, value of ext for ext in extensions
   obj
-  
+
 addEvent = (element, event, fn, useCapture = false) ->
   element.addEventListener event, fn, useCapture
-  
+
 setStyles = (element, styles) ->
   for key of styles
     element.style[key] = styles[key]
-    
+
 destroy = (element) ->
   element.parentNode.removeChild element
-  
+
 class Heyoffline
-  
+
   # default options
   options:
     text:
@@ -32,19 +32,19 @@ class Heyoffline
     #   console.log 'online', @
     # onOffline: ->
     #   console.log 'offline', @
-    
+
   # set a global flag if any field on the page has been modified
   modified: false
-  
+
   constructor: (options) ->
     extend @options, options
     @setup()
-    
+
   setup: ->
     @events =
       element: ['keyup', 'change']
       network: ['online', 'offline']
-    
+
     @elements =
       fields: document.querySelectorAll @options.elements.join ','
       overlay: document.createElement 'div'
@@ -52,7 +52,7 @@ class Heyoffline
       heading: document.createElement 'h2'
       content: document.createElement 'p'
       button: document.createElement 'a'
-      
+
     @defaultStyles =
       overlay:
         position: 'absolute'
@@ -80,75 +80,78 @@ class Heyoffline
       button:
         fontWeight: 'bold'
         cursor: 'pointer'
-        
+
     @attachEvents()
-    
+
+  setOptions: (options) ->
+    extend @options, options
+
   createElements: ->
-    
+
     # overlay
     @createElement document.body, 'overlay'
     @resizeOverlay()
-    
+
     # modal
     @createElement @elements.overlay, 'modal'
-    
+
     # heading
     @createElement @elements.modal, 'heading', @options.text.title
-    
+
     # content
     @createElement @elements.modal, 'content', @options.text.content
-    
+
     # button
     if not @options.disableDismiss
       @createElement @elements.modal, 'button', @options.text.button
       addEvent @elements.button, 'click', @hideMessage
-      
+
   createElement: (context, element, text) ->
     @elements[element].setAttribute 'class', "#{@options.prefix}_#{element}"
     @elements[element] = context.appendChild @elements[element]
     @elements[element].innerHTML = text if text
     setStyles @elements[element], @defaultStyles[element] unless @options.noStyles
-    
+
   resizeOverlay: ->
     setStyles @elements.overlay,
       height: "#{window.innerHeight}px"
-      
+
   destroyElements: ->
     destroy @elements.overlay if @elements.overlay
-    
+
   attachEvents: ->
     @elementEvents field for field in @elements.fields
     @networkEvents event for event in @events.network
-    
+
     addEvent window, 'resize', =>
       @resizeOverlay()
-      
+
   elementEvents: (field) ->
     for event in @events.element
       do (event) =>
         addEvent field, event, =>
           @modified = true
-          
+
   networkEvents: (event) ->
     addEvent window, event, @[event]
-    
+
   online: (event) =>
     @hideMessage()
-    
+
   offline: =>
     if @options.monitorFields
       @showMessage() if @modified
     else
       @showMessage()
-      
+
   showMessage: ->
     @createElements()
     @options.onOnline.call @ if @options.onOnline
-    
+
   hideMessage: (event) =>
     event.preventDefault() if event
     @destroyElements()
     @options.onOffline.call @ if @options.onOffline
-    
+
 addEvent window, 'load', ->
   window.Heyoffline = new Heyoffline
