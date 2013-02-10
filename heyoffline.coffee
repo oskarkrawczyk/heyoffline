@@ -1,7 +1,12 @@
 # extend object with another objects
-extend = (obj, extensions...) ->
-  (obj[key] = value) for key, value of ext for ext in extensions
-  obj
+extend = (destination, source) ->
+  for obj of source
+    if source[property] and source[property].constructor and source[property].constructor is Object
+      destination[property] = destination[property] or {}
+      arguments_.callee destination[property], source[property]
+    else
+      destination[property] = source[property]
+  destination
 
 addEvent = (element, event, fn, useCapture = false) ->
   element.addEventListener event, fn, useCapture
