@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="public/stylesheets/screen.css" type="text/css" media="screen, projection" />
     <script type="text/javascript" src="public/javascripts/heyoffline.js"></script>
     <script type="text/javascript">
-      new Heyoffline();
+      window.addEventListener('load', function(){
+        new Heyoffline();
+      }, false);
     </script>
     <title>Heyoffline.js</title>
   </head>
@@ -27,6 +29,7 @@
         width="48pt" height="22pt"></iframe></p>
 
       <h3>Setup</h3>
+
       <h4>CoffeeScript</h4>
 <pre>
 new Heyoffline
@@ -41,6 +44,8 @@ new Heyoffline({
   elements: ['.monitoredFields']
 });
 </pre>
+
+      <p>Remember that instantiation needs to be done within a <strong>load</strong> or <strong>domready</strong>.</p>
 
       <h3>Options</h3>
       <table>
