@@ -79,6 +79,24 @@ new Heyoffline({
     <td>Relax, I know what I'm doing</td>
     <td class="desc">Dimissal button of the modal window</td>
   </tr>
+  <tr>
+    <td>usePolling</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td class="desc">Use polling instead of online/offline hooks</td>
+  </tr>
+  <tr>
+    <td>pollingInterval</td>
+    <td>milliseconds</td>
+    <td>3000</td>
+    <td class="desc">polling interval</td>
+  </tr>
+  <tr>
+    <td>requestSettings</td>
+    <td>object</td>
+    <td>{url: window.location.href, cache: false, type: "HEAD"}</td>
+    <td class="desc">settings for jQuery.ajax() http://api.jquery.com/jQuery.ajax/</td>
+  </tr>
 </table>
 
 ## Events
@@ -101,7 +119,7 @@ new Heyoffline({
 </table>
 
 ## Requirements
-Heyoffline.js is **framework-agnostic**. No need for jQuery. It's written in **CoffeeScript**, and compiled into JavaScript.
+jQuery. It's written in **CoffeeScript**, and compiled into JavaScript.
 
 ## Source code
 All efforts have been made to keep the source as clean and readable as possible.
