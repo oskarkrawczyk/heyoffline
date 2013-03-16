@@ -17,7 +17,7 @@ setStyles = (element, styles) ->
     element.style[key] = styles[key]
 
 destroy = (element) ->
-  element.parentNode.removeChild element
+  element.parentNode?.removeChild(element)
 
 class Heyoffline
 
@@ -34,13 +34,21 @@ class Heyoffline
     noStyles: false
     disableDismiss: false
     elements: ['input', 'select', 'textarea', '*[contenteditable]']
-    # onOnline: ->
-    #   console.log 'online', @
-    # onOffline: ->
-    #   console.log 'offline', @
+
+    usePolling: false
+    pollingInterval: 3000
+    requestSettings:
+      url: window.location.href
+      cache: false
+      type: "HEAD"
+  # onOnline: ->
+  #   console.log 'online', @
+  # onOffline: ->
+  #   console.log 'offline', @
 
   # set a global flag if any field on the page has been modified
   modified: false
+  connectionStatus: "online"
 
   constructor: (options) ->
     extend @options, options
@@ -89,6 +97,16 @@ class Heyoffline
 
     @attachEvents()
 
+    if @options.usePolling and not @options.monitorFields
+
+      startPollingOnWindowActive = => @startPolling(@online, @offline)
+      document.addEventListener("visibilitychange", startPollingOnWindowActive)
+      document.addEventListener("webkitvisibilitychange", startPollingOnWindowActive)
+      document.addEventListener("msvisibilitychange", startPollingOnWindowActive)
+      document.addEventListener("mozvisibilitychange", startPollingOnWindowActive)
+
+      @startPolling(@online, @offline)
+
   createElements: ->
 
     # overlay
@@ -124,7 +142,9 @@ class Heyoffline
 
   attachEvents: ->
     @elementEvents field for field in @elements.fields
-    @networkEvents event for event in @events.network
+
+    if not @options.usePolling
+      @networkEvents event for event in @events.network
 
     addEvent window, 'resize', =>
       @resizeOverlay()
@@ -133,19 +153,27 @@ class Heyoffline
     for event in @events.element
       do (event) =>
         addEvent field, event, =>
+          console.log('field event')
+          console.log(field)
           @modified = true
+          @testConnection(@online, @offline) if @options.usePolling
 
   networkEvents: (event) ->
     addEvent window, event, @[event]
 
   online: (event) =>
-    @hideMessage()
+    if "online" isnt @connectionStatus
+      @hideMessage()
+      @connectionStatus = "online"
 
   offline: =>
-    if @options.monitorFields
-      @showMessage() if @modified
-    else
-      @showMessage()
+    if "offline" isnt @connectionStatus
+      if @options.monitorFields
+        @showMessage() if @modified
+      else
+        @showMessage()
+
+      @connectionStatus = "offline"
 
   showMessage: ->
     @createElements()
@@ -155,3 +183,18 @@ class Heyoffline
     event.preventDefault() if event
     @destroyElements()
     @options.onOffline.call @ if @options.onOffline
+
+
+  isWindowActive: ->
+    !(document.hidden || document.webkitHidden || document.msHidden || document.mozHidden)
+
+  testConnection: (onlineCallback, offlineCallback) ->
+    $.ajax(@options.requestSettings)
+      .done(onlineCallback)
+      .fail(offlineCallback)
+
+  startPolling: (onlineCallback, offlineCallback) =>
+    if @isWindowActive()
+      @testConnection(onlineCallback, offlineCallback).always( =>
+        scheduleNextCheck = => @startPolling(onlineCallback, offlineCallback)
+        setTimeout(scheduleNextCheck, @options.pollingInterval))
