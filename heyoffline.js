@@ -67,6 +67,9 @@
 
     function Heyoffline(options) {
       var _this = this;
+      this.startPolling = function(onlineCallback, offlineCallback) {
+        return Heyoffline.prototype.startPolling.apply(_this, arguments);
+      };
       this.hideMessage = function(event) {
         return Heyoffline.prototype.hideMessage.apply(_this, arguments);
       };
@@ -81,6 +84,8 @@
     }
 
     Heyoffline.prototype.setup = function() {
+      var startPollingOnWindowActive,
+        _this = this;
       this.events = {
         element: ['keyup', 'change'],
         network: ['online', 'offline']
@@ -128,6 +133,13 @@
       };
       this.attachEvents();
       if (this.options.usePolling && !this.options.monitorFields) {
+        startPollingOnWindowActive = function() {
+          return _this.startPolling(_this.online, _this.offline);
+        };
+        document.addEventListener("visibilitychange", startPollingOnWindowActive);
+        document.addEventListener("webkitvisibilitychange", startPollingOnWindowActive);
+        document.addEventListener("msvisibilitychange", startPollingOnWindowActive);
+        document.addEventListener("mozvisibilitychange", startPollingOnWindowActive);
         return this.startPolling(this.online, this.offline);
       }
     };
@@ -249,19 +261,25 @@
       }
     };
 
+    Heyoffline.prototype.isWindowActive = function() {
+      return !(document.hidden || document.webkitHidden || document.msHidden || document.mozHidden);
+    };
+
     Heyoffline.prototype.testConnection = function(onlineCallback, offlineCallback) {
       return $.ajax(this.options.requestSettings).done(onlineCallback).fail(offlineCallback);
     };
 
     Heyoffline.prototype.startPolling = function(onlineCallback, offlineCallback) {
       var _this = this;
-      return this.testConnection(onlineCallback, offlineCallback).always(function() {
-        var scheduleNextCheck;
-        scheduleNextCheck = function() {
-          return _this.startPolling(onlineCallback, offlineCallback);
-        };
-        return setTimeout(scheduleNextCheck, _this.options.pollingInterval);
-      });
+      if (this.isWindowActive()) {
+        return this.testConnection(onlineCallback, offlineCallback).always(function() {
+          var scheduleNextCheck;
+          scheduleNextCheck = function() {
+            return _this.startPolling(onlineCallback, offlineCallback);
+          };
+          return setTimeout(scheduleNextCheck, _this.options.pollingInterval);
+        });
+      }
     };
 
     return Heyoffline;

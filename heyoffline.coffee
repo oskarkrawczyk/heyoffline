@@ -1,5 +1,3 @@
-# git@github.com:akalinovskiy/heyoffline.js.git
-
 # extend object with another objects
 extend = (destination, source) ->
   if source
@@ -99,7 +97,15 @@ class Heyoffline
 
     @attachEvents()
 
-    @startPolling(@online, @offline) if @options.usePolling and not @options.monitorFields
+    if @options.usePolling and not @options.monitorFields
+
+      startPollingOnWindowActive = => @startPolling(@online, @offline)
+      document.addEventListener("visibilitychange", startPollingOnWindowActive)
+      document.addEventListener("webkitvisibilitychange", startPollingOnWindowActive)
+      document.addEventListener("msvisibilitychange", startPollingOnWindowActive)
+      document.addEventListener("mozvisibilitychange", startPollingOnWindowActive)
+
+      @startPolling(@online, @offline)
 
   createElements: ->
 
@@ -179,12 +185,16 @@ class Heyoffline
     @options.onOffline.call @ if @options.onOffline
 
 
+  isWindowActive: ->
+    !(document.hidden || document.webkitHidden || document.msHidden || document.mozHidden)
+
   testConnection: (onlineCallback, offlineCallback) ->
     $.ajax(@options.requestSettings)
       .done(onlineCallback)
       .fail(offlineCallback)
 
-  startPolling: (onlineCallback, offlineCallback) ->
-    @testConnection(onlineCallback, offlineCallback).always( =>
-      scheduleNextCheck = => @startPolling(onlineCallback, offlineCallback)
-      setTimeout(scheduleNextCheck, @options.pollingInterval))
+  startPolling: (onlineCallback, offlineCallback) =>
+    if @isWindowActive()
+      @testConnection(onlineCallback, offlineCallback).always( =>
+        scheduleNextCheck = => @startPolling(onlineCallback, offlineCallback)
+        setTimeout(scheduleNextCheck, @options.pollingInterval))
