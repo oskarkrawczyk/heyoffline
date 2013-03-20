@@ -6,6 +6,8 @@ See **[demo](http://oskarkrawczyk.github.com/heyoffline.js/)**.
 
 ## Setup
 
+You can install Heyoffline via Bower with `bower install Heyoffline` or download `heyoffline.js` and include it the old-fashined way.
+
 ### CoffeeScript
 ```coffeescript
 new Heyoffline
