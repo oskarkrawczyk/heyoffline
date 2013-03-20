@@ -21,6 +21,8 @@ destroy = (element) ->
 
 class Heyoffline
 
+  version: '1.1'
+
   # default options
   options:
     text:
