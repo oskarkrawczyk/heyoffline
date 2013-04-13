@@ -1,24 +1,3 @@
-# extend object with another objects
-extend = (destination, source) ->
-  if source
-    for property of source
-      if source[property] and source[property].constructor and source[property].constructor is Object
-        destination[property] = destination[property] or {}
-        arguments.callee destination[property], source[property]
-      else
-        destination[property] = source[property]
-  destination
-
-addEvent = (element, event, fn, useCapture = false) ->
-  element.addEventListener event, fn, useCapture
-
-setStyles = (element, styles) ->
-  for key of styles
-    element.style[key] = styles[key]
-
-destroy = (element) ->
-  element.parentNode.removeChild element
-
 class Heyoffline
 
   version: '1.1'
@@ -27,9 +6,7 @@ class Heyoffline
   options:
     text:
       title: "You're currently offline"
-      content: "Seems like you've gone offline,
-                you might want to wait until your network comes back before continuing.<br /><br />
-                This message will self-destruct once you're online again."
+      content: "You might want to wait until your network comes back before continuing.<br /><br />"
       button: "Relax, I know what I'm doing"
     monitorFields: false
     prefix: 'heyoffline'
@@ -45,7 +22,7 @@ class Heyoffline
   modified: false
 
   constructor: (options) ->
-    extend @options, options
+    @_extend @options, options
     @setup()
 
   setup: ->
@@ -107,46 +84,44 @@ class Heyoffline
     @createElement @elements.modal, 'content', @options.text.content
 
     # button
-    if not @options.disableDismiss
+    unless @options.disableDismiss
       @createElement @elements.modal, 'button', @options.text.button
-      addEvent @elements.button, 'click', @hideMessage
+      @_addEvent @elements.button, 'click', @hideMessage
 
   createElement: (context, element, text) ->
     @elements[element].setAttribute 'class', "#{@options.prefix}_#{element}"
     @elements[element] = context.appendChild @elements[element]
     @elements[element].innerHTML = text if text
-    setStyles @elements[element], @defaultStyles[element] unless @options.noStyles
+    @_setStyles @elements[element], @defaultStyles[element] unless @options.noStyles
 
   resizeOverlay: ->
-    setStyles @elements.overlay,
+    @_setStyles @elements.overlay,
       height: "#{window.innerHeight}px"
 
   destroyElements: ->
-    destroy @elements.overlay if @elements.overlay
+    @_destroy @elements.overlay if @elements.overlay
 
   attachEvents: ->
     @elementEvents field for field in @elements.fields
     @networkEvents event for event in @events.network
 
-    addEvent window, 'resize', =>
+    @_addEvent window, 'resize', =>
       @resizeOverlay()
 
   elementEvents: (field) ->
     for event in @events.element
       do (event) =>
-        addEvent field, event, =>
+        @_addEvent field, event, =>
           @modified = true
 
   networkEvents: (event) ->
-    addEvent window, event, @[event]
+    @_addEvent window, event, @[event]
 
   online: (event) =>
     @hideMessage()
 
   offline: =>
-    if @options.monitorFields
-      @showMessage() if @modified
-    else
+    unless @options.monitorFields and not @modified
       @showMessage()
 
   showMessage: ->
@@ -157,3 +132,24 @@ class Heyoffline
     event.preventDefault() if event
     @destroyElements()
     @options.onOffline.call @ if @options.onOffline
+
+  # extend object with another objects
+  _extend : (destination, source) ->
+    if source
+      for property of source
+        if source[property] and source[property].constructor and source[property].constructor is Object
+          destination[property] = destination[property] or {}
+          arguments.callee destination[property], source[property]
+        else
+          destination[property] = source[property]
+    destination
+
+  _addEvent : (element, event, fn, useCapture = false) ->
+    element.addEventListener event, fn, useCapture
+
+  _setStyles : (element, styles) ->
+    for key of styles
+      element.style[key] = styles[key]
+
+  _destroy : (element) ->
+    element.parentNode.removeChild element if element.parentNode
