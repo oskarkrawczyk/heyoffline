@@ -39,7 +39,7 @@ destroy = function(element) {
 
 Heyoffline = (function() {
 
-  Heyoffline.prototype.version = '1.1';
+  Heyoffline.prototype.version = '1.1.1';
 
   Heyoffline.prototype.options = {
     text: {
