@@ -1,27 +1,29 @@
-# extend object with another objects
-extend = (destination, source) ->
-  if source
-    for property of source
-      if source[property] and source[property].constructor and source[property].constructor is Object
-        destination[property] = destination[property] or {}
-        arguments.callee destination[property], source[property]
-      else
-        destination[property] = source[property]
-  destination
+class Helpers
 
-addEvent = (element, event, fn, useCapture = false) ->
-  element.addEventListener event, fn, useCapture
+  # extend object with another objects
+  extend: (destination, source) ->
+    if source
+      for property of source
+        if source[property] and source[property].constructor and source[property].constructor is Object
+          destination[property] = destination[property] or {}
+          arguments.callee destination[property], source[property]
+        else
+          destination[property] = source[property]
+    destination
 
-setStyles = (element, styles) ->
-  for key of styles
-    element.style[key] = styles[key]
+  addEvent: (element, event, fn, useCapture = false) ->
+    element.addEventListener event, fn, useCapture
 
-destroy = (element) ->
-  element.parentNode.removeChild element
+  setStyles: (element, styles) ->
+    for key of styles
+      element.style[key] = styles[key]
 
-class Heyoffline
+  destroy: (element) ->
+    element.parentNode.removeChild element
 
-  version: '1.1.1'
+class @Heyoffline extends Helpers
+
+  version: '1.1.2'
 
   # default options
   options:
@@ -45,7 +47,7 @@ class Heyoffline
   modified: false
 
   constructor: (options) ->
-    extend @options, options
+    @extend @options, options
     @setup()
 
   setup: ->
@@ -54,40 +56,40 @@ class Heyoffline
       network: ['online', 'offline']
 
     @elements =
-      fields: document.querySelectorAll @options.elements.join ','
-      overlay: document.createElement 'div'
-      modal: document.createElement 'div'
-      heading: document.createElement 'h2'
-      content: document.createElement 'p'
-      button: document.createElement 'a'
+      fields:   document.querySelectorAll @options.elements.join ','
+      overlay:  document.createElement 'div'
+      modal:    document.createElement 'div'
+      heading:  document.createElement 'h2'
+      content:  document.createElement 'p'
+      button:   document.createElement 'a'
 
     @defaultStyles =
       overlay:
-        position: 'absolute'
-        top: 0
-        left: 0
-        width: '100%'
+        position:   'absolute'
+        top:        0
+        left:       0
+        width:      '100%'
         background: 'rgba(0, 0, 0, 0.3)'
-        zIndex: 500
+        zIndex:     500
       modal:
-        padding: '15px'
-        background: '#fff'
-        boxShadow: '0 2px 30px rgba(0, 0, 0, 0.3)'
-        width: '450px'
-        margin: '0 auto'
-        position: 'relative'
-        top: '30%'
-        color: '#444'
+        padding:      '15px'
+        background:   '#fff'
+        boxShadow:    '0 2px 30px rgba(0, 0, 0, 0.3)'
+        width:        '450px'
+        margin:       '0 auto'
+        position:     'relative'
+        top:          '30%'
+        color:        '#444'
         borderRadius: '2px'
-        zIndex: 600
+        zIndex:       600
       heading:
-        fontSize: '1.7em'
-        paddingBottom: '15px'
+        fontSize:       '1.7em'
+        paddingBottom:  '15px'
       content:
         paddingBottom: '15px'
       button:
         fontWeight: 'bold'
-        cursor: 'pointer'
+        cursor:     'pointer'
 
     @attachEvents()
 
@@ -109,7 +111,7 @@ class Heyoffline
     # button
     if not @options.disableDismiss
       @createElement @elements.modal, 'button', @options.text.button
-      addEvent @elements.button, 'click', @hideMessage
+      @addEvent @elements.button, 'click', @hideMessage
 
   createElement: (context, element, text) ->
     @elements[element].setAttribute 'class', "#{@options.prefix}_#{element}"
@@ -118,17 +120,17 @@ class Heyoffline
     setStyles @elements[element], @defaultStyles[element] unless @options.noStyles
 
   resizeOverlay: ->
-    setStyles @elements.overlay,
+    @setStyles @elements.overlay,
       height: "#{window.innerHeight}px"
 
   destroyElements: ->
-    destroy @elements.overlay if @elements.overlay
+    @destroy @elements.overlay if @elements.overlay
 
   attachEvents: ->
     @elementEvents field for field in @elements.fields
     @networkEvents event for event in @events.network
 
-    addEvent window, 'resize', =>
+    @addEvent window, 'resize', =>
       @resizeOverlay()
 
   elementEvents: (field) ->
@@ -138,7 +140,7 @@ class Heyoffline
           @modified = true
 
   networkEvents: (event) ->
-    addEvent window, event, @[event]
+    @addEvent window, event, @[event]
 
   online: (event) =>
     @hideMessage()
