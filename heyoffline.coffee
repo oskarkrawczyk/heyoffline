@@ -23,7 +23,7 @@ class Helpers
 
 class @Heyoffline extends Helpers
 
-  version: '1.1.2'
+  version: '1.1.3'
 
   # default options
   options:
@@ -117,7 +117,7 @@ class @Heyoffline extends Helpers
     @elements[element].setAttribute 'class', "#{@options.prefix}_#{element}"
     @elements[element] = context.appendChild @elements[element]
     @elements[element].innerHTML = text if text
-    setStyles @elements[element], @defaultStyles[element] unless @options.noStyles
+    @setStyles @elements[element], @defaultStyles[element] unless @options.noStyles
 
   resizeOverlay: ->
     @setStyles @elements.overlay,
