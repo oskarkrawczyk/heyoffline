@@ -136,7 +136,7 @@ class @Heyoffline extends Helpers
   elementEvents: (field) ->
     for event in @events.element
       do (event) =>
-        addEvent field, event, =>
+        @addEvent field, event, =>
           @modified = true
 
   networkEvents: (event) ->
