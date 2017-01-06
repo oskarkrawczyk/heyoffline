@@ -1,9 +1,6 @@
 # Heyoffline.js (actually Heyoffline.coffee)
 Warn your users when their network goes down. Make sure they don't lose anything.
 
-## Demo
-See **[demo](http://oskarkrawczyk.github.com/heyoffline.js/)**.
-
 ## Setup
 
 You can install Heyoffline via Bower with `bower install Heyoffline` or download `heyoffline.js` and include it the old-fashined way.
