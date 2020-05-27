@@ -1,4 +1,4 @@
-# Heyoffline.js (actually Heyoffline.coffee)
+# heyoffline.js
 Warn your users when their network goes down. Make sure they don't lose anything.
 
 ## Setup
