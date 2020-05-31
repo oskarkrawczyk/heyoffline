@@ -2,15 +2,17 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <script src="heyoffline.js" charset="utf-8"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        window.HO = new Heyoffline({})
-        // HO.offline()
-      })
-    </script>
   </head>
   <body>
     <input type="text">
+
+    <!-- <script src="dist/heyoffline.umd.js" charset="utf-8"></script> -->
+    <script type="module">
+      import Heyoffline from './dist/heyoffline.esm.js'
+
+      const hoff = new Heyoffline()
+      hoff.offline()
+    </script>
+
   </body>
 </html>
