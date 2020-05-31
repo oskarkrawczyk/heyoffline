@@ -3,24 +3,17 @@ Warn your users when their network goes down. Make sure they don't lose anything
 
 ## Setup
 
-You can install Heyoffline via Bower with `bower install Heyoffline` or download `heyoffline.js` and include it the old-fashined way.
-
-### CoffeeScript
-```coffeescript
-new Heyoffline
-  monitorFields: true
-  elements: ['.monitoredFields']
-```
+[TODO]
 
 ### JavaScript
 ```javascript
 new Heyoffline({
   monitorFields: true,
-  elements: ['.monitoredFields']
+  fields: ".monitoredFields"
 });
 ```
-## Options
 
+## Options
 <table>
   <tr>
     <th class="name">Name</th>
@@ -53,9 +46,9 @@ new Heyoffline({
     <td class="desc">By default the user can dimiss the warning. With this option you can hide the dismiss button.</td>
   </tr>
   <tr>
-    <td>elements</td>
+    <td>fields</td>
     <td>array</td>
-    <td><code>['input', 'select', 'textarea', '*[contenteditable]']</code></td>
+    <td><code>"input, select, textarea, *[contenteditable]"</code></td>
     <td class="desc">Field elements that will be monitored for changes - see <code>monitorFields</code> option.</td>
   </tr>
   <tr>
@@ -100,7 +93,7 @@ new Heyoffline({
 </table>
 
 ## Requirements
-Heyoffline.js is **framework-agnostic**. No need for jQuery. It's written in **CoffeeScript**, and compiled into JavaScript.
+Heyoffline.js is **framework-agnostic** vanilla JS.
 
 ## Source code
 All efforts have been made to keep the source as clean and readable as possible.

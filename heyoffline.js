@@ -23,11 +23,9 @@ class Heyoffline {
       disableDismiss: false,
       overlay:        true,
       fields:         "input, select, textarea, *[contenteditable]"
+      // onOnline:  () => {},
+      // onOffline: () => {}
     }
-      // onOnline: ->
-      //   console.log "online", @
-      // onOffline: ->
-      //   console.log "offline", @
 
     // set a global flag if any field on the page has been modified
     this.modified = false
