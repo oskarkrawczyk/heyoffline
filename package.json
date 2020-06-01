@@ -1,6 +1,6 @@
 {
   "name": "heyoffline",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Notify your users when their network goes down. Make sure they don't lose anything.",
   "keywords": [
     "javascript",

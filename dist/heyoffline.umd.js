@@ -2,12 +2,11 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = global || self, global.Heyoffline = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
   const Heyoffline = class Heyoffline {
 
     constructor(options){
-      this.version = "2.0.1";
 
       // default options
       this.options = {
@@ -304,4 +303,4 @@
 
   return Heyoffline;
 
-}));
+})));

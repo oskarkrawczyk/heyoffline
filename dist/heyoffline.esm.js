@@ -1,7 +1,6 @@
 const Heyoffline = class Heyoffline {
 
   constructor(options){
-    this.version = "2.0.1";
 
     // default options
     this.options = {
