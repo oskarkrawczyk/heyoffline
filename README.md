@@ -1,5 +1,13 @@
 # heyoffline.js
-Warn your users when their network goes down. Make sure they don't lose anything.
+Notify your users when their network goes down. Make sure they don't lose anything.
+
+## Features
+
+- Notify on general network outage
+- Notify only when users have unsaved form field states
+- Default, pretty generic, good looking styles
+
+[gif]
 
 ## Module
 ```JavaScript
@@ -103,7 +111,7 @@ new Heyoffline({
 </table>
 
 ## Requirements
-Heyoffline.js is **framework-agnostic** vanilla JS.
+**Heyoffline** is **framework-agnostic** vanilla JS.
 
 ## Source code
 All efforts have been made to keep the source as clean and readable as possible.
