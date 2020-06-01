@@ -7,10 +7,12 @@ Notify your users when their network goes down. Make sure they don't lose anythi
 - Notify only when users have unsaved form field states
 - Default, pretty generic, good looking styles
 
-[gif]
+![](https://user-images.githubusercontent.com/34213/83430658-520d1600-a436-11ea-89da-0b6035fdf818.gif)
 
-## Module
-```JavaScript
+## Setup
+
+### Module
+```javascript
 import Heyoffline from "./dist/heyoffline.esm.js"
 new Heyoffline()
 ```
