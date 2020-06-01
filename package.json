@@ -1,6 +1,30 @@
 {
-  "name": "Heyoffline",
+  "name": "heyoffline",
   "version": "2.0.0",
+  "description": "Notify your users when their network is down.",
+  "keywords": [
+    "javascript",
+    "browser",
+    "front-end",
+    "offline",
+    "online",
+    "vanilla"
+  ],
+  "homepage": "https://github.com/oskarkrawczyk/heyoffline",
+  "bugs": {
+    "url": "https://github.com/oskarkrawczyk/heyoffline/issues",
+    "email": "your-public-email@example.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oskarkrawczyk/heyoffline.git"
+  },
+  "author": "Oskar Krawczyk <oskar@krawczyk.io> (krawczyk.io)",
+  "license": "MIT",
+  "private": false,
+  "main": "dist/heyoffline.umd.js",
+  "module": "dist/heyoffline.esm.js",
+  "browser": "dist/heyoffline.umd.js",
   "scripts": {
     "start": "gulp watch",
     "build": "rollup --config rollup.config.js"
@@ -10,11 +34,5 @@
     "bs-snippet-injector": "latest",
     "gulp": "latest",
     "fs": "latest"
-  },
-  "prettier": {
-    "trailingComma": "none",
-    "semi": false,
-    "singleQuote": false,
-    "quoteProps": "consistent"
   }
 }
