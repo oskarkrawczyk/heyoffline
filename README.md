@@ -11,13 +11,18 @@ Notify your users when their network goes down. Make sure they don't lose anythi
 
 ## Setup
 
+
 ### Module
+NPM: [`heyoffline`](https://www.npmjs.com/package/heyoffline)
+
 ```javascript
 import Heyoffline from "./dist/heyoffline.esm.js"
 new Heyoffline()
 ```
 
 ### Browser
+UNPKG: [`https://unpkg.com/heyoffline@latest/dist/heyoffline.umd.js`](https://unpkg.com/heyoffline@latest/dist/heyoffline.umd.js)
+
 ```html
 <script src="dist/heyoffline.umd.js"></script>
 ```
