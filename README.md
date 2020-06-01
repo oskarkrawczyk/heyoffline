@@ -1,11 +1,17 @@
 # heyoffline.js
 Warn your users when their network goes down. Make sure they don't lose anything.
 
-## Setup
+## Module
+```JavaScript
+import Heyoffline from "./dist/heyoffline.esm.js"
+new Heyoffline()
+```
 
-[TODO]
+### Browser
+```html
+<script src="dist/heyoffline.umd.js"></script>
+```
 
-### JavaScript
 ```javascript
 new Heyoffline({
   monitorFields: true,
@@ -43,33 +49,37 @@ new Heyoffline({
     <td>disableDimiss</td>
     <td>boolean</td>
     <td>false</td>
-    <td class="desc">By default the user can dimiss the warning. With this option you can hide the dismiss button.</td>
+    <td class="desc">By default the user can dismiss the warning. With this option you can hide the dismiss button.</td>
   </tr>
   <tr>
     <td>fields</td>
-    <td>array</td>
+    <td>string</td>
     <td><code>"input, select, textarea, *[contenteditable]"</code></td>
     <td class="desc">Field elements that will be monitored for changes - see <code>monitorFields</code> option.</td>
   </tr>
   <tr>
-    <td>text.title</td>
+    <td>text.offline.title</td>
     <td>string</td>
     <td>You're currently offline</td>
     <td class="desc">Heading of the modal window</td>
   </tr>
   <tr>
-    <td>text.content</td>
+    <td>text.offline.content</td>
     <td>string</td>
-    <td>Seems like you've became offline,
-      you might want to wait until your network comes back before continuing.<br /><br />
-      This message will self-destruct once you're online again.</td>
+    <td>Wait until your network comes back before continuing.</td>
     <td class="desc">Body message of the modal window</td>
   </tr>
   <tr>
-    <td>text.button</td>
+    <td>text.offline.button</td>
     <td>string</td>
-    <td>Relax, I know what I'm doing</td>
-    <td class="desc">Dimissal button of the modal window</td>
+    <td>Dismiss</td>
+    <td class="desc">Dismissal button of the modal window</td>
+  </tr>
+  <tr>
+    <td>text.offline.icon</td>
+    <td>string</td>
+    <td>SVG icon</td>
+    <td class="desc">Modal icon</td>
   </tr>
 </table>
 
