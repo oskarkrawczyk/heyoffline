@@ -1,4 +1,4 @@
-# heyoffline.js
+# 🔌 Heyoffline
 Notify your users when their network goes down. Make sure they don't lose anything.
 
 ## Features
